@@ -11,15 +11,15 @@ const grandpa = ["5034309550", "5034309550", "5034309550"];
 module.exports = (context, callback) => {
     console.log('level 1');
     
-    tel = '5034309550';
+    var tel = '5034309550';
     client.calls
         .create({
             url: process.env.CALL_URL,
             to: `+1${tel}`,
             from: process.env.TWILIO_NUMBER, 
-            StatusCallback: 'https://taisei.lib.id/fallcall@dev/testhook/',
+            statusCallback: 'https://taisei.lib.id/fallcall@dev/testhook',
             statusCallbackEvent: ["initiated", "ringing", "answered", "completed"],
-            StatusCalbackMethod: 'POST',
+            statusCallbackMethod: 'GET',
             method : 'GET'
         })
         .then(call => callback(null, `Grandpa fell! Called ${tel}`));
