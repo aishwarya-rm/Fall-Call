@@ -10,6 +10,8 @@
 #include <math.h>
 
 int ledPin = D7;
+#define buzzerPin D2 
+#define buttonPin D5
 
 // MPU variables:
 MPU6050 accelgyro;
@@ -35,6 +37,8 @@ void toggleLed() {
 
 void setup() {
     pinMode(ledPin, OUTPUT);
+    pinMode(buzzerPin, OUTPUT);
+    pinMode(buttonPin, INPUT_PULLUP);
 
     Wire.begin();
     Serial.begin(9600);
@@ -48,11 +52,12 @@ void setup() {
     
 }
 
-int fallMagnitudeThreshold = 15000;
-int fallSessionsThreshold = 25;
+int fallMagnitudeThreshold = 7000;
+int fallSessionsThreshold = 20;
 int sessionsFallen = 0;
 
 void loop() {
+    
     // read raw accel/gyro measurements from device
     accelgyro.getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
     
@@ -61,8 +66,22 @@ void loop() {
         sessionsFallen++;
         if (sessionsFallen >= fallSessionsThreshold) {
             Serial.println("FALLEN");
+            tone(buzzerPin, 2000);
+            bool buttonPressed = false;
+            int i = 0;
+            while(i < 500) {
+                int val = digitalRead(buttonPin);
+                Serial.println(val);
+                if (val == LOW) {
+                    buttonPressed = true;
+                    break;
+                }
+                delay(10);
+                i++;
+            }
             
-            request.hostname = "taisei.lib.id";
+            if (!buttonPressed) {
+                request.hostname = "taisei.lib.id";
               request.port = 80;
               request.path = "/fallcall@0.0.2/level1/";
         
@@ -75,6 +94,10 @@ void loop() {
               // UNCOMMENT TO CHECK WHEN WE FALL
               Serial.print("Application>\tHTTP Response Body: ");
               Serial.println(response.body);
+            }
+            
+            
+             noTone(buzzerPin);
               
         }
     } else {
