@@ -1,7 +1,7 @@
 const client = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
 const tel2 = '4255307834';
-const tel = '5034309550'; // change back to pretend 911 number
+const tel = '2066613732'; // change back to pretend 911 number
 /*
 * Makes a call to a person then hits the webhook
 * @returns {string}
