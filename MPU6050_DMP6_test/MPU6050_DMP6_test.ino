@@ -236,13 +236,17 @@ void setup() {
     pinMode(LED_PIN, OUTPUT);
 }
 
-
+int fallMagnitudeThreshold = 2000; // CHANGE 
+int fallSessionsThreshold = 5; // CHANGE
+int sessionsFallen = 0;
 
 // ================================================================
 // ===                    MAIN PROGRAM LOOP                     ===
 // ================================================================
 
 void loop() {
+
+            
     // if programming failed, don't try to do anything
     if (!dmpReady) return;
 
@@ -299,17 +303,28 @@ void loop() {
             float y = aaWorld.y;
             float z = aaWorld.z;
             
-            Serial.print("aworld\t");
-            Serial.print(x);
-            Serial.print("\t");
-            Serial.print(y);
-            Serial.print("\t");
-            Serial.println(z);
-
-            Serial.print("\t");
+//            Serial.print("aworld\t");
+//            Serial.print(x);
+//            Serial.print("\t");
+//            Serial.print(y);
+//            Serial.print("\t");
+//            Serial.println(z);
+//
+//            Serial.print("\t");
 
             // Magnitude of x, y, z from accelerometer 
-            Serial.println(sqrt(sq(x)+ sq(y) + sq(z)));
+
+            float magnitude = sqrt(sq(x)+ sq(y) + sq(z));
+            Serial.println(magnitude);
+            if (magnitude >= fallMagnitudeThreshold && z < 0) {
+              sessionsFallen++;
+              if (sessionsFallen >= fallSessionsThreshold) {
+                Serial.println("\t\t\t\t\t\t");
+                Serial.println("FALLEN");
+              }
+            } else {
+              sessionsFallen = 0;
+            }
         #endif
     
        
