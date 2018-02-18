@@ -1,0 +1,24 @@
+{
+  "name": "fallcall",
+  "version": "0.0.1",
+  "description": "Makes a call to a person if hit by post",
+  "author": "taisei <taiseiklasen@gmail.com>",
+  "main": "functions/__main__.js",
+  "dependencies": {
+    "lib": "^3.0.1",
+    "request": "^2.81.0",
+    "twilio": "^3.11.3"
+  },
+  "private": true,
+  "stdlib": {
+    "build": "faaslang",
+    "name": "taisei/fallcall",
+    "timeout": 10000,
+    "publish": true,
+    "personalize": {
+      "keys": [],
+      "user": []
+    },
+    "source": "twilio"
+  }
+}
