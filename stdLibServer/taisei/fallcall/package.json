@@ -1,6 +1,6 @@
 {
   "name": "fallcall",
-  "version": "0.0.1",
+  "version": "0.0.5",
   "description": "Makes a call to a person if hit by post",
   "author": "taisei <taiseiklasen@gmail.com>",
   "main": "functions/__main__.js",

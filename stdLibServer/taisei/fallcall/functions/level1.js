@@ -22,7 +22,7 @@ module.exports = (latitude = 0.0, longitude = 0.0, context, callback) => {
             url: process.env.CALL_URL,
             to: `+1${tel2}`,
             from: process.env.TWILIO_NUMBER, 
-            statusCallback: 'https://taisei.lib.id/fallcall@dev/level3',
+            statusCallback: 'https://taisei.lib.id/fallcall@0.0.5/level3',
             statusCallbackEvent: ["completed"],
             statusCallbackMethod: 'GET',
             method : 'GET'
@@ -34,7 +34,7 @@ module.exports = (latitude = 0.0, longitude = 0.0, context, callback) => {
             url: process.env.CALL_URL,
             to: `+1${tel}`,
             from: process.env.TWILIO_NUMBER, 
-            statusCallback: 'https://taisei.lib.id/fallcall@dev/level2',
+            statusCallback: 'https://taisei.lib.id/fallcall@0.0.5/level2',
             statusCallbackEvent: ["completed"],
             statusCallbackMethod: 'GET',
             method : 'GET'
