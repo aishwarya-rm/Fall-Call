@@ -52,8 +52,8 @@ void setup() {
     
 }
 
-int fallMagnitudeThreshold = 7000;
-int fallSessionsThreshold = 20;
+int fallMagnitudeThreshold = 20000;
+int fallSessionsThreshold = 15;
 int sessionsFallen = 0;
 
 void loop() {
@@ -83,7 +83,7 @@ void loop() {
             if (!buttonPressed) {
                 request.hostname = "taisei.lib.id";
               request.port = 80;
-              request.path = "/fallcall@0.0.2/level1/";
+              request.path = "/fallcall@0.0.5/level1/";
         
         
               // Get request
